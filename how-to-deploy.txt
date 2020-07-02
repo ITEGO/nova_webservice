@@ -1,0 +1,30 @@
+1. Bajar el proyecto y poner composer install.
+2. El proyecto necesita conectar con SQLSRV con lo cual hay que bajar los drivers de aca:
+https://docs.microsoft.com/es-es/sql/connect/php/download-drivers-php-sql-server?view=sql-server-ver15
+3. Copiar el .env.example y pegar como .env, verificar los datos de la base de datos.
+4. El ejemplo va a ser con PHP 7.4. El proyecto requeire 7.2.5
+5. En el php.ini agregar:
+
+
+extension=php_sqlsrv_74_ts_x64.dll
+extension=php_pdo_sqlsrv_74_ts_x64.dll
+
+
+Nota: ojo acá, depende la version de PHP instalada, el ejemplo es para la version 7.4 
+(por eso tiene el 74 en el medio del nombre)
+
+6. Para chequear que el driver está disponible, ir al proyecto y poner
+php artisan tinker
+DB::availableDrivers()
+
+si dice "sqlsrv", estamos bien.
+
+7.El httpd.conf debe tener activado el Allowoverride All en la parte de directory
+
+8. La carpeta storage debe tener permisos 777 (esto en windows no aplica)
+
+
+
+########## SEPARADOR HUMILDE ###########
+Anotacion: el generador de modelos de eloquent es la librería krlove
+comando para generar modelos: php artisan krlove:generate:model User --table-name=user
